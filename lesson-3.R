@@ -1,20 +1,22 @@
 # Database connections from R
 
 library(RSQLite)
-con <- dbConnect(...)
+con <- dbConnect(SQLite(), "data/portal.sqlite")
 dbGetQuery(con, "pragma foreign_keys = on")
-...
+dbListTables(con)
 
 # Two ways to access data
 
 plots <- dbReadTable(con, "plots")
-surveys <- dbReadTable(...)
-...
+surveys <- dbReadTable(con, "surveys")
+species <- dbReadTable(con, "species")
+
+str(surveys)
 
 dbGetQuery(con, "select species_id, weight
-                 ...
-                 ...
-                 ...)
+                 from surveys
+                 where plot_id = 1 limit 5")
+                
 
 # Exercise 1
 
